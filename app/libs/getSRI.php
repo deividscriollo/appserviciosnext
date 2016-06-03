@@ -189,7 +189,7 @@ namespace App\libs;
 					$_data['sucursal'][] = array('codigo' => $arr_1[$i+0], 'nombre_sucursal'=>$arr_1[$i+1], 'direccion'=>$arr_1[$i+2], 'estado'=>$arr_1[$i+3]);
 				}
 			}
-			$_data['adicional'] = array('cedula' => $arr_1[count($arr_1)-3], 'reprecentante_legal' => $arr_1[count($arr_1)-5]);
+			$_data['adicional'] = array('cedula' => $arr_1[count($arr_1)-3], 'representante_legal' => $arr_1[count($arr_1)-5]);
 			return $_data;
 		}
 		/* ------------------------------------------- consumiendo web service comprobantes  -----------------------------------------*/

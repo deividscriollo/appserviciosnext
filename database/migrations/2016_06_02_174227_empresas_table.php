@@ -20,8 +20,11 @@ class EmpresasTable extends Migration
             $table->string('tipo_contribuyente');
             $table->string('obligado_contabilidad');
             $table->string('actividad_economica');
-            $table->string('telefono');
+            $table->string('nombres_apellidos');
+            $table->string('fecha_nacimiento');
             $table->string('correo');
+            $table->string('telefono');
+            $table->string('celular');
             $table->timestamps();
         });
     }

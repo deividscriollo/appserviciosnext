@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('registroEmpresas','registroController@registrarEmpresa');
-Route::get('getDatos','registroController@getDatos');
-Route::post('registroPersona','registroController@registrarPersona');
+// Route::post('registroEmpresas','registroController@registrarEmpresa');
+Route::get('getDatos','datosController@getDatos');
+// Route::post('registroPersona','registroController@registrarPersona');

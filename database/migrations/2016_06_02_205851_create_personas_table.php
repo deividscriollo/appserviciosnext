@@ -20,8 +20,9 @@ class CreatePersonasTable extends Migration
             $table->string('canton');
             $table->string('parroquia');
             $table->string('zona');
-            $table->string('telefono');
             $table->string('correo');
+            $table->string('telefono');
+            $table->string('celular');
             $table->timestamps();
         });
     }
