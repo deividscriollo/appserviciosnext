@@ -58,6 +58,38 @@ include_once('simple_html_dom.php');
 			curl_close($ch);
 			return $res;
 		}
+		/* ------------------------------------ verificar actecedente --------------------*/
+		function consultar_antecedentes($valor){
+			$antecedentes = '';
+			$url="http://www.mdi.gob.ec/minterior1/antecedentes/data.php"; 
+			$postinfo = "tipo=getDataWs&ci=".$valor."&tp=C";
+			$cookie_file_path = "cookie.txt";
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_HEADER, false);
+			curl_setopt($ch, CURLOPT_NOBODY, false);
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+
+			curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file_path);
+			//set the cookie the site has for certain features, this is optional
+			curl_setopt($ch, CURLOPT_USERAGENT,"");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_REFERER, $_SERVER['REQUEST_URI']);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
+
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $postinfo);
+			curl_exec($ch);
+
+			curl_setopt($ch, CURLOPT_URL, "http://www.mdi.gob.ec/minterior1/antecedentes/data.php");
+
+			$html = curl_exec($ch);
+			curl_close($ch);
+			$datos=json_decode($html);
+			return $datos[0]->antecedent;
+		}
 		/* ------------------------------------ verificar existencia del numero de  ruc en la base de datos --------------------*/
 		function verificar_existencia_cedula($html){
 			$existencia = 'true';
@@ -87,12 +119,14 @@ include_once('simple_html_dom.php');
 						$i++;
 					}
 			    }
-			    return   $acumulador = array('nombres_apelidos'=> $results[0],
+			    $antecedentes=$this->consultar_antecedentes($cedula);
+			    return   $acumulador = array('nombres_apellidos'=> $results[0],
 			    					'cedula'=> $cedula,
 									'provincia'=> $results[1], 
 									'canton'=> $results[2], 
 									'parroquia'=> $results[4], 
 									'zona'=> trim($results[5]),
+									'antecedentes'=> $antecedentes,
 									'valid' => 'true'				
 								);
 			}else
