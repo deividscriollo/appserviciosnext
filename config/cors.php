@@ -12,7 +12,8 @@ return [
      |
      */
     'supportsCredentials' => false,
-    'allowedOrigins' => ['http://apiservicios.nextbook.ec','http://localhost','http://192.168.1.32'],
+    // 'allowedOrigins' => ['http://apiservicios.nextbook.ec','http://localhost','http://192.168.1.32'],
+    'allowedOrigins' => ['*'],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['*'],
     'exposedHeaders' => [],
