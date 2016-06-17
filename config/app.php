@@ -203,6 +203,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DatosCedula' =>App\libs\DatosCedula::class,
+        'DatosMovil' =>App\libs\DatosMovil::class,
 
     ],
 

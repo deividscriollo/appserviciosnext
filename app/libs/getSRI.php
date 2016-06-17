@@ -192,16 +192,16 @@ namespace App\libs;
 			$_data['adicional'] = array('cedula' => $arr_1[count($arr_1)-3], 'representante_legal' => $arr_1[count($arr_1)-5]);
 			return $_data;
 		}
-		/* ------------------------------------------- consumiendo web service comprobantes  -----------------------------------------*/
-		function estado_factura_electronica($clave_acceso){
-			// $wsdl = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl"; // Ambiente de Pruebas
-			// $wsdl = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl"; // Ambiente de Pruebas
-			// $wsdl = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl"; // Ambiente Produccion 
-			$wsdl = "https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl"; // Ambiente Produccion
-			$client = new SoapClient($wsdl, array('encoding'=>'UTF-8'));
-			$res = $client->AutorizacionComprobante(array('claveAccesoComprobante'=> $clave_acceso));
-			// print_r($res->RespuestaAutorizacionComprobante);
-			return $res->RespuestaAutorizacionComprobante;
-		}
+		// /* ------------------------------------------- consumiendo web service comprobantes  -----------------------------------------*/
+		// function estado_factura_electronica($clave_acceso){
+		// 	// $wsdl = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantes?wsdl"; // Ambiente de Pruebas
+		// 	// $wsdl = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl"; // Ambiente de Pruebas
+		// 	// $wsdl = "https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl"; // Ambiente Produccion 
+		// 	$wsdl = "https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl"; // Ambiente Produccion
+		// 	$client = new \SoapClient($wsdl, array('encoding'=>'UTF-8'));
+		// 	$res = $client->AutorizacionComprobante(array('claveAccesoComprobante'=> $clave_acceso));
+		// 	// print_r($res->RespuestaAutorizacionComprobante);
+		// 	return $res->RespuestaAutorizacionComprobante;
+		// }
 	}
 ?>

@@ -17,4 +17,6 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'cors'], function(){
     Route::get('getDatos','datosController@getDatos');
+    Route::post('cosultarMovil','datosController@consultar_Movil');
+    Route::post('estado_factura','datosController@estado_fac_electronica');
 });
