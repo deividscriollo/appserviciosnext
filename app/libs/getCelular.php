@@ -13,7 +13,7 @@ include_once('simple_html_dom.php');
 		var $url;
 		var $proxy;
 		function __construct() {
-			$this->url = "https://app03.cne.gob.ec/domicilioelectoral/Default.aspx";					
+			// $this->url = "https://app03.cne.gob.ec/domicilioelectoral/Default.aspx";					
 			$user_agent[] = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322; FDM)";
 			$user_agent[] = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; Avant Browser [avantbrowser.com]; Hotbar 4.4.5.0)";
 			$user_agent[] = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en; rv:1.8.1.14) Gecko/20080409 Camino/1.6 (like Firefox/2.0.0.14)";
@@ -27,20 +27,20 @@ include_once('simple_html_dom.php');
 		function verificar_existencia_movil($valor){
 			$proxies = array(); // Declaring an array to store the proxy list
  
-// Adding list of proxies to the $proxies array
-$proxies[] = '186.118.168.202:3128';  // Some proxies require user, password, IP and port number
-$proxies[] = '200.54.180.226:80';
-$proxies[] = '168.102.134.47:8080';
-// $proxies[] = '185.80.130.70:3128';  // Some proxies only require IP
-// $proxies[] = '52.37.109.168:8083';
-// $proxies[] = '112.137.164.232:3128'; // Some proxies require IP and port number
-// $proxies[] = '111.1.23.148:80';
+			// // Adding list of proxies to the $proxies array
+			// $proxies[] = '195.58.245.70:3120';  // Some proxies require user, password, IP and port number
+			// // $proxies[] = '200.54.180.226:80';
+			// // $proxies[] = '168.102.134.47:8080';
+			// // $proxies[] = '185.80.130.70:3128';  // Some proxies only require IP
+			// // $proxies[] = '52.37.109.168:8083';
+			// // $proxies[] = '112.137.164.232:3128'; // Some proxies require IP and port number
+			// // $proxies[] = '111.1.23.148:80';
 
-// Choose a random proxy
-if (isset($proxies)) {  // If the $proxies array contains items, then
-    $proxy = $proxies[array_rand($proxies)];    // Select a random proxy from the array and assign to $proxy variable
-    echo $proxy;
-}
+			// // Choose a random proxy
+			// if (isset($proxies)) {  // If the $proxies array contains items, then
+			//     $proxy = $proxies[array_rand($proxies)];    // Select a random proxy from the array and assign to $proxy variable
+			//     // echo $proxy;
+			// }
 			
 			// $valor = '0959999350';
 			$movil = substr($valor,1,strlen($valor));
@@ -48,7 +48,7 @@ if (isset($proxies)) {  // If the $proxies array contains items, then
 			$postinfo = "lang=8&id=&ism=-&telno=".$movil."";
 			$cookie_file_path = "cookie.txt";
 			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_PROXY, $proxy);    // Set CURLOPT_PROXY with proxy in $proxy variable
+			// curl_setopt($ch, CURLOPT_PROXY, $proxy);    // Set CURLOPT_PROXY with proxy in $proxy variable
 			curl_setopt($ch, CURLOPT_HEADER, false);
 			curl_setopt($ch, CURLOPT_NOBODY, false);
 			curl_setopt($ch, CURLOPT_URL, $url);
@@ -72,8 +72,21 @@ if (isset($proxies)) {  // If the $proxies array contains items, then
 			$html = curl_exec($ch);
 			curl_close($ch);
 			echo $html;
-		}
-
-
+			 $html=str_get_html($html);
+			// $htmlreturn = $html->find('table[id=dlDirElec]', 0);
+			$i=0;
+			$results=array();
+			// echo $html->find('div[class=res] span', 1);
+			if ((string)$html->find('div[class=res] span', 1)!="") {
+				$auxoperadora=explode(':', $html->find('div[class=res] span', 1)->plaintext);
+				$auxmovil=explode(':', $html->find('div[class=res] span', 0)->plaintext);
+				$results['operadora']=$auxoperadora[1];
+				$results['nro']=$auxmovil[1];
+				$results['status']=200;
+			}
+			else{
+				$results['status']=401;
+			}
+			return $results;
 	}
-?>
+}

@@ -44,7 +44,7 @@ class datosController extends Controller
      public function consultar_Movil(Request $request)
     {
             $movilclass  = new DatosMovil(); 
-            $resultado=$movilclass->verficar_existencia_movil($request->input('celular')); 
+            $resultado=$movilclass->verificar_existencia_movil($request->input('celular')); 
             return $resultado; 
         
     }
