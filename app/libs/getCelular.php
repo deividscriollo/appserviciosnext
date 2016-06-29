@@ -43,7 +43,11 @@ include_once('simple_html_dom.php');
 			// }
 			
 			// $valor = '0959999350';
+			if (strlen($valor)==10) {
 			$movil = substr($valor,1,strlen($valor));
+			}else 
+			$movil = $valor;
+
 			$url="https://lookup.ascp.com.ec/lookup.html"; 
 			$postinfo = "lang=8&id=&ism=-&telno=".$movil."";
 			$cookie_file_path = "cookie.txt";
@@ -71,7 +75,7 @@ include_once('simple_html_dom.php');
 
 			$html = curl_exec($ch);
 			curl_close($ch);
-			echo $html;
+			// echo $html;
 			 $html=str_get_html($html);
 			// $htmlreturn = $html->find('table[id=dlDirElec]', 0);
 			$i=0;

@@ -45,7 +45,7 @@ class datosController extends Controller
     {
             $movilclass  = new DatosMovil(); 
             $resultado=$movilclass->verificar_existencia_movil($request->input('celular')); 
-            return $resultado; 
+            return response()->json($resultado); 
         
     }
 }
