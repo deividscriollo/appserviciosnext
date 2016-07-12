@@ -102,7 +102,9 @@ include_once('simple_html_dom.php');
 		/* ------------------------------------------- proceso consulta cedula como empresa ----------------------------------------*/
 		function consultar_cedula($cedula) {
 			$html = $this->method_curt_cedula($cedula);
-			 $encontrado= str_get_html($html)->find('table[id=tblControles] tr td div[id=pnlResults] p span[id=lblNro]', 0)->plaintext;
+			$estado=str_get_html($html)->find('font', 0)->plaintext;
+			if ($estado=="") {
+			 $encontrado=str_get_html($html)->find('table[id=tblControles] tr td div[id=pnlResults] p span[id=lblNro]', 0)->plaintext;
 			if ($encontrado!="0") {
 				$html = str_get_html($html);
 				$htmlreturn = $html->find('table[id=dlDirElec]', 0);
@@ -131,6 +133,7 @@ include_once('simple_html_dom.php');
 								);
 			}else
 				return $results[] = array('valid' => 'false');
+			}else return $results[] = array('valid' => 'false',"mensaje"=>"El servicio solicitado no se encuentra disponible en este momento.");
 		}
 
 
