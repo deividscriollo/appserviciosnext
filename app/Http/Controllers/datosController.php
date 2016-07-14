@@ -37,8 +37,8 @@ class datosController extends Controller
             $wsdl = "https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantes?wsdl"; // Ambiente Produccion
             $client = new \SoapClient($wsdl, array('encoding'=>'UTF-8'));
             $res = $client->AutorizacionComprobante(array('claveAccesoComprobante'=> $request->input('clave')));
-            // print_r($res->RespuestaAutorizacionComprobante);
-            return response()->json([$res->RespuestaAutorizacionComprobante]);
+            print_r($res->RespuestaAutorizacionComprobante);
+            // return response()->json([$res->RespuestaAutorizacionComprobante]);
     }
 
      public function consultar_Movil(Request $request)
